@@ -1,0 +1,6 @@
+g_gyrate.o g_gyrate.o: g_gyrate.c ../../src/config.h \
+  ../../include/gmx_ana.h
+
+../../src/config.h:
+
+../../include/gmx_ana.h:

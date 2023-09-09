@@ -1,0 +1,542 @@
+###########################################
+# Atom Types
+##########################################
+[ GENERIC ]
+     C      CGEN
+     N      NGEN
+     O      OGEN
+     H      HGEN
+     S      SGEN
+     P      PGEN
+     FE     FEGEN
+     CA     CA
+     NA     NA
+     K      K
+     CL     CL
+     ZN     ZN
+     I      IGEN
+     F      FGEN
+     BR     BR
+#==========================================
+# amino acids
+#==========================================
+[ DEFAULT ]
+     C      C   sp2
+     H      H
+    CA     CA   sp3
+     O      O
+     N    NH1  sp2
+    CB   CH2E  sp3
+    HA     HA
+   OXT     OC
+    OT     OH1
+    HO     H
+
+[ ALA ]
+   1HB     H0
+    CB   CH3E  sp3
+   3HB     H0
+   2HB     H0
+
+[ ARG ]
+  2HH2     HC
+  2HH1     HC
+  1HH1     HC
+  1HH2     HC
+    CG   CH2E  sp3
+    NE    NH1  sp2
+    CD    CDR  sp3
+   1HB     H0
+    CZ      C  sp2
+   NH1    NC2  sp2
+   1HG     H0
+   1HD     HDR
+   NH2    NC2  sp2
+   2HB     H0
+   2HD     HDR  
+   2HG     H0
+    HE      H
+
+[ ASN ]
+   2HB     H0
+   OD1      O  sp2
+    CG      C  sp2
+  2HD2      H
+   1HB     H0
+  1HD2      H
+   ND2    NH2  sp2
+
+[ ASP ]
+   1HB     H0
+   OD1     OC  sp2
+   OD2     OC  sp2
+   2HB     H0
+    CG      C  sp2
+   HD2      H
+
+[ CYS ]
+   1HB     H0
+   2HB     H0
+    SG      S
+    HG     H0
+
+[ GLN ]
+   OE1      O  sp2
+  2HE2      H
+    CG   CH2E  sp3
+    CD      C  sp2
+   1HB     H0
+   1HG     H0
+   2HB     H0
+   NE2    NH2  sp2
+  1HE2      H
+   2HG     H0
+
+[ GLU ]
+   OE2     OC  sp2
+   OE1     OC  sp2
+    CG   CH2E  sp3
+    CD      C  sp2
+   1HB     H0
+   1HG     H0
+   2HB     H0
+   2HG     H0
+    HE2    H
+
+[ GLY ]
+   2HA     HA
+    CA   CH2G  sp3
+   1HA     HA
+
+[ HIS ]
+   CD2   CR1H  sp2
+   HD1      H
+    CG     C5  sp2
+   HE1    HAR
+   1HB     H0
+   CE1   CRHH  sp2
+   ND1    NH1  sp2
+   2HB     H0
+   NE2    NHS  sp2
+   HD2    HAR
+   HE2    H
+
+[ ILE ]
+  2HG2     H0
+  2HG1     H0
+    CB   CH1E  sp3
+  3HG2     H0
+  2HD1     H0
+  3HD1     H0
+    HB     H0
+  1HG2     H0
+   CD1   CH3E  sp3
+  1HG1     H0
+   CG1   CH2E  sp3
+   CG2   CH3E  sp3
+  1HD1     H0
+
+[ LEU ]
+  3HD1     H0
+  1HD2     H0
+  1HD1     H0
+  2HD2     H0
+    CG   CH1E  sp3
+  2HD1     H0
+   1HB     H0
+  3HD2     H0
+   CD1   CH3E  sp3
+   CD2   CH3E  sp3
+   2HB     H0
+    HG     H0
+
+[ LYS ]
+   2HZ     HC
+   1HZ     HC
+   3HZ     HC
+    CG   CH2E  sp3
+    CE   CH2E  sp3
+    CD   CH2E  sp3
+   1HB     H0
+    NZ    NH3  sp3
+   1HG     H0
+   1HD     H0
+   1HE     H0
+   2HB     H0
+   2HE     H0
+   2HD     H0
+   2HG     H0
+
+[ LYSH ]
+   2HZ     HC
+   1HZ     HC
+   3HZ     HC
+    CG   CH2E  sp3
+    CE   CH2E  sp3
+    CD   CH2E  sp3
+   1HB     H0
+    NZ    NH3  sp3
+   1HG     H0
+   1HD     H0
+   1HE     H0
+   2HB     H0
+   2HE     H0
+   2HD     H0
+   2HG     H0
+
+[ MET ]
+    CG   CH2E  sp3
+    CE   CH3E  sp3
+   1HB     H0
+   1HG     H0
+   1HE     H0
+   3HE     H0
+   2HB     H0
+   2HE     H0
+   2HG     H0
+    SD     SM
+
+[ PHE ]
+    HZ    HAR
+   HE2    HAR
+   CD2   CR1E  sp2
+   HD1    HAR
+    CG     CF  sp2
+   HE1    HAR 
+   1HB     H0
+    CZ   CR1E  sp2
+   HD2    HAR
+   CD1   CR1E  sp2
+   CE1   CR1E  sp2
+   2HB     H0
+   CE2   CR1E  sp2
+
+[ PRO ]
+    CB   CH2P  sp3
+    CG   CH2P  sp3
+    CD   CH2P  sp3
+   1HB     H0
+   1HG     H0
+   1HD     H0
+   2HB     H0
+   2HD     H0
+   2HG     H0
+
+[ SER ]
+    OG    OH1  sp3
+   1HB     H0
+   2HB     H0
+    HG      H
+
+[ THR ]
+  2HG2     H0
+    CB   CH1E  sp3
+  3HG2     H0
+   OG1    OH1  sp3
+   HG1      H
+  1HG2     H0
+    HB     H0
+   CG2   CH3E  sp3
+
+[ TRP ]
+   HH2    HAR
+   2HB     H0
+   HE1      H
+   HD1    HAR
+   HE3    HAR
+   CZ2   CR1W  sp2
+   CZ3   CR1E  sp2
+    CG    C5W  sp2
+   1HB     H0
+   CH2   CR1W  sp2
+   CE3   CR1E  sp2
+   CE2     CW  sp2
+   CD2   CR1E  sp2
+   HZ2    HAR
+   NE1    NH1  sp2
+   HZ3    HAR
+   CD1     CW  sp2
+
+[ TYR ]
+   HE2    HAR
+   CD2   CR1E  sp2
+   HD1    HAR
+    OH    OH1  sp3
+    CG     CY  sp2
+   HE1    HAR
+   1HB     H0
+    CZ    CY2  sp2
+    HH      H
+   HD2    HAR
+   CD1   CR1E  sp2
+   CE1   CR1E  sp2
+   2HB     H0
+   CE2   CR1E  sp2
+
+[ VAL ]
+  2HG2     H0
+  2HG1     H0
+    CB   CH1E  sp3
+  3HG2     H0
+    HB     H0
+  1HG2     H0
+  3HG1     H0
+  1HG1     H0
+   CG1   CH3E  sp3
+   CG2   CH3E  sp3
+
+#################################################
+# Termini
+#################################################
+
+[ COO- ]
+     OXT  OC
+
+[ COOH ]
+       OT  O
+       O   OH1
+       HO  H
+
+[ NH3+ ]
+       1H  HC
+       2H  HC
+       3H  HC
+
+[ NH2 ]
+       1H  H
+       2H  H
+        N  NHB
+
+[ PRO-NH2+ ]
+       1H  HC
+       2H  HC
+
+[ PRO-NH ]
+       H  H
+       N  NHB
+
+#################################################
+# Special Cases
+#################################################
+
+[ HISB ]
+#      HE2  H
+      ND1  NHS
+      NE2  NH1
+
+[ HISH ]
+      HE2  H
+      NE2 NH1
+
+[ LYSN ]
+       HZ1   H
+       HZ2   H
+       NZ   NH2
+
+[ ASPH ]
+        HD2  H
+        OD2  OH1
+        OD1  O
+
+[ GLUH ]
+        HE2  H
+        OE2  OH1
+        OE1  O
+
+#===============================================
+# DNA Residues
+#===============================================
+[ T ]
+    P      PN
+    C3'    C3S
+    O3'    O3S
+    OP1    OP
+    OP2    OP
+    O5'    O5S
+    C5'    C5S
+    C4'    C4S
+    O4'    O4S
+    C1'    C1S
+    C2'    C2S
+    N1     N1T
+    C6     C6T
+    C5     C5T
+    C4     C4T
+    O4     O4T
+    N3     N3T
+    C2     C2T
+    O2     O2T
+    C7     C7T
+    'H5'   H0
+    H5'    H0
+    H4'    H0
+    H3'    H0
+    'H2'   H0
+    H2'    H0
+    H1'    H0
+    H3     H
+    H71    H0
+    H72    H0
+    H73    H0
+    H6     H0
+
+[ A ]
+    P      PN
+    C3'    C3S
+    O3'    O3S
+    OP1    OP
+    OP2    OP
+    O5'    O5S
+    C5'    C5S
+    C4'    C4S
+    O4'    O4S
+    C1'    C1S
+    C2'    C2S
+    N9     N9A
+    C8     C8A
+    N7     N7A
+    C5     C5A
+    C6     C6A
+    N6     N6A
+    N1     N1A
+    C2     C2A
+    N3     N3A
+    C4     C4A 
+    'H5'   H0
+    H5'    H0
+    H4'    H0
+    H3'    H0
+    'H2'   H0
+    H2'    H0
+    H1'    H0
+    H8     H0
+    H61    H
+    H62    H
+    H2     H0
+
+[ G ]
+    P      PN
+    C3'    C3S
+    O3'    O3S
+    OP1    OP
+    OP2    OP
+    O5'    O5S
+    C5'    C5S
+    C4'    C4S
+    O4'    O4S
+    C1'    C1S
+    C2'    C2S
+    N9     N9G
+    C8     C8G
+    N7     N7G
+    C5     C5G
+    C6     C6G
+    O6     O6G
+    N1     N1G
+    C2     C2G
+    N2     N2G
+    N3     N3G
+    C4     C4G
+    'H5'   H0
+    H5'    H0
+    H4'    H0
+    H3'    H0
+    'H2'   H0
+    H2'    H0
+    H1'    H0
+    H8     H0
+    H1     H
+    H21    H
+    H22    H
+
+[ C ]
+    P      PN
+    C3'    C3S
+    O3'    O3S
+    OP1    OP
+    OP2    OP
+    O5'    O5S
+    C5'    C5S
+    C4'    C4S
+    O4'    O4S
+    C1'    C1S
+    C2'    C2S
+    N1     N1C
+    C2     C2C
+    C6     C6C
+    C5     C5C
+    C4     C4C
+    N4     N4C
+    N3     N3C
+    O2     O2C
+    'H5'   H0
+    H5'    H0
+    H4'    H0
+    H3'    H0
+    'H2'   H0
+    H2'    H0
+    H1'    H0
+    H41    H
+    H42    H
+    H5     H0
+    H6     H0
+ #===============================================
+# solvent molecules
+#===============================================
+[ HOH ]
+
+    O    OWAT
+    H1   HWAT
+    H2   HWAT
+
+[ SOL ]
+   OW    OWAT
+   HW1   HWAT
+   HW2   HWAT
+   HW3   HWAT
+   MW    MWAT
+   MW1   MWAT
+   OW4   OWAT	
+
+#===============================================
+# IONS
+#===============================================
+
+[ NA ]
+
+    NA   NA
+
+[ MG ]
+    
+    MG   MG
+
+[ CA ]
+    
+    CA   CAL
+
+[ K ]
+
+    K    K
+
+[ ZN ]
+
+    ZN   ZN
+
+[ FE ]
+
+    FE   FE
+
+[ MN ]
+    MN   MN
+
+
+[ SO4 ]
+    S   SUL
+    O1   OSUL
+    O2   OSUL
+    O3   OSUL
+    O4   OSUL
+
+[ CL- ]
+   CL    CL
+    

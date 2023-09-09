@@ -1,0 +1,94 @@
+
+#=================================
+#
+#   planar groups
+#
+#================================
+
+[ OMEGA ]
+
+2   0.05
+N
+C
+
+[ PHE ]
+
+6   0.03
+CG
+CD1
+CD2
+CE1
+CE2
+CZ
+
+[ TYR ]
+
+6   0.03
+CG
+CD1
+CD2
+CE1
+CE2
+CZ
+
+[ HIS ]
+
+5   0.03
+CG
+ND1
+CD2
+CE1
+NE2
+
+[ TRP ]
+
+9   0.03
+CG
+CD1
+CD2
+NE1
+CE2
+CE3
+CZ2
+CZ3
+CH2
+
+[ ARG ]
+
+4  0.02
+NE
+CZ
+NH1
+NH2
+
+[ ASP ]
+
+3  0.02
+CG
+OD1
+OD2
+
+[ ASN ]
+
+3  0.02
+CG
+OD1
+ND2
+
+[ GLU ]
+
+3  0.02
+CD
+OE1
+OE2
+
+[ GLN ]
+
+3  0.02
+CD 
+OE1
+NE2
+
+
+
+

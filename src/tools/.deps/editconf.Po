@@ -1,0 +1,6 @@
+editconf.o editconf.o: editconf.c ../../src/config.h \
+  ../../include/gmx_ana.h
+
+../../src/config.h:
+
+../../include/gmx_ana.h:

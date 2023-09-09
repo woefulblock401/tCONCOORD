@@ -1,0 +1,249 @@
+; library file with vdw radii, 1-4 vdw radii and special combinations
+; optimized from 106 high-resolution x-ray structures 12/02/06 
+; protonated with WHATIF HB2NET
+
+[ TYPES ] 
+;type  vdw    vdw14   ros. atom type
+
+;=================================================
+; protons
+
+H0     1.19    1.16   ; aliphatic hydrogens
+HAR    1.14    1.15   ; aromatic hydrogens 
+HA     1.03    1.09   ; H-alpha
+H      1.05    1.01   ; polar hydrogens
+HC     0.58    1.12   ; charged hydrogens 
+HDR   0.67    0.86    ; HD in ARG
+;==================================================
+; amino acids
+
+C      1.43    1.40 ; C=O
+CA     1.48    1.47 ; C-alpha
+CH1E   1.92    1.54 ; CHR3
+CH2E   1.89    1.49 ; CH2R2
+CH3E   1.81    1.47 ; CH3R
+CR1E   1.81    1.36 ; aromatic carbon
+CR1W   1.76    1.80 ; aromatic carbon in TRP
+C5     1.76    1.50 ; histidin
+C5W    1.86    1.54 ; TRP 
+CW     1.74    1.36 ; TRP 
+CH2G   1.76    1.46 ; C-alpha in glycine
+CH2P   1.47    1.45 ; CH2 in proline
+CY     1.87    1.53 ; CG in TYR
+CY2    1.63    2.07 ; CH in TYR
+CF     1.83    1.53 ; CG in PHE
+CDR   1.69    1.53 ; CD in ARG
+CR1H   1.75    1.50 ; histidin
+CRHH   1.63    1.97 ; histidin
+O      1.41    1.23 ; C=O
+OC     1.33    1.26 ; charged O 
+OH1    1.31    1.38 ; alcohol
+NH1    1.37    1.40 ; NHR2
+NH2    1.45    1.26 ; NH2R
+NH3    1.35    1.42 ; sidechain N in lysine
+NC2    1.45    1.16 ; NH2 in arginine
+NHS    1.40    1.40 ; N in histidin( not protonated)
+NHB    1.46    1.40 ; unprotonated n-terminus
+S      1.83    1.45 ; S in cystein
+SM     1.79    1.33 ; S in methionine
+
+; generic
+
+CGEN   1.7     1.7
+NGEN   1.4     1.4
+OGEN   1.3     1.3
+HGEN   1.0     1.0
+SGEN   1.8     1.8
+PGEN   2.0     2.0
+FEGEN  2.0     2.0
+FGEN   1.2     1.2
+CAL     1.6     1.6
+NA     1.5     1.5
+K      1.8     1.8
+CL     1.8     1.8
+ZN     1.5     1.5
+IGEN      2.3     2.3
+BR     2.0     2.0
+
+;===================================================
+; nucleic acids
+PN      2.0    2.0
+C3S     1.7    1.7
+O3S     1.3    1.3
+OP      1.3    1.3
+O5S     1.3    1.3
+C5S     1.7    1.7
+C4S     1.7    1.7
+O4S     1.3    1.3   
+C1S     1.7    1.7
+C2S     1.7    1.7
+
+N1T     1.4    1.4
+C6T     1.7    1.7
+C5T     1.7    1.7
+C4T     1.7    1.7
+O4T     1.3    1.3
+N3T     1.4    1.4
+C2T     1.7    1.7
+O2T     1.3    1.3
+C7T     1.7    1.7
+
+N9A     1.4    1.4
+C8A     1.7    1.7
+N7A     1.4    1.4
+C5A     1.7    1.7
+C6A     1.7    1.7
+N6A     1.4    1.4
+N1A     1.4    1.4
+C2A     1.7    1.7
+N3A     1.4    1.4
+C4A     1.7    1.7
+
+N9G     1.4    1.4
+C8G     1.7    1.7
+N7G     1.4    1.4
+C5G     1.7    1.7
+C6G     1.7    1.7
+O6G     1.3    1.3
+N1G     1.4    1.4
+C2G     1.7    1.7
+N2G     1.4    1.4
+N3G     1.4    1.4
+C4G     1.7    1.7
+
+N1C     1.4    1.4
+C2C     1.7    1.7
+C6C     1.7    1.7
+C5C     1.7    1.7
+C4C     1.7    1.7
+N4C     1.4    1.4
+N3C     1.4    1.4
+O2C     1.3    1.3
+
+;===================================================
+; solvent 
+OWAT   1.4     1.4 ; <- nonsens
+HWAT   1.0     1.0
+MWAT   0.2     0.2
+;===================================================
+; ions
+FE     1.7     1.7
+MG     1.5     1.5
+MN     1.5     1.5
+SUL    1.8     1.8
+OSUL   1.3     1.3
+
+;===================================================
+; for conversion to concoord only
+[ DEFAULT ]
+H*     1.0     1.0
+N*     1.4     1.4
+O*     1.3     1.3
+C*     1.7     1.7
+S*     1.8     1.8
+
+;===================================================
+
+[ GENERIC ]
+CGEN   1.7     1.7
+NGEN   1.4     1.4
+OGEN   1.3     1.3
+HGEN   1.0     1.0
+SGEN   1.8     1.8
+PGEN   2.0     2.0
+FEGEN  2.0     2.0
+CA     1.6     1.6
+NA     1.5     1.5
+K      1.8     1.8
+CL     1.8     1.8
+ZN     1.5     1.5
+
+;===================================================
+; combinations for special atom types
+[ COMBINATIONS ]
+
+; hydrogen bonds
+O     H    1.86
+O    HC    1.70
+O    HWAT  1.8   ;guess
+OH1   H    1.68
+OH1  HC    1.72
+OH1  HWAT  1.7   ;guess
+OC   HC    1.74
+OC   H     1.58
+OC   HWAT  1.7   ;guess
+NHS  H     1.94
+NHS  HC    2.04
+NHB  H     2.00  ; guess
+NHB  HC    1.95  ; guess
+
+; guessed values
+NHS   HWAT   2.00
+NHB   HWAT   2.00
+N1A      H   1.9
+N1A     HC   1.9
+N1A   HWAT   1.9
+N3A      H   1.9
+N3A     HC   1.9
+N3A   HWAT   1.9
+N7A      H   1.9
+N7A     HC   1.9
+N7A   HWAT   1.9
+N3G      H   1.9
+N3G     HC   1.9
+N3G   HWAT   1.9
+N7G      H   1.9
+N7G     HC   1.9
+N7G   HWAT   1.9
+O6G      H   1.8
+O6G     HC   1.8
+O6G   HWAT   1.8
+N3C      H   1.9
+N3C     HC   1.9
+N3C   HWAT   1.9
+O2C      H   1.8
+O2C     HC   1.8
+O2C   HWAT   1.8
+O4T      H   1.8
+O4T     HC   1.8
+O4T   HWAT   1.8
+O2T      H   1.8
+O2T     HC   1.8
+O2T   HWAT   1.8
+OWAT      H  1.8
+OWAT     HC  1.8
+OWAT   HWAT  1.8
+O     O    3.3  
+O    OC    3.00
+OH1   O    2.64
+O    NH1   2.82
+O    NC2   2.80
+O    NH2   2.86
+O    NH3   2.6
+O    NHS   3.04
+NH1  NHS   2.88
+NH2  NHS   3.00
+NH3  NHS   3.00
+O    CA    3.18
+HA   O     2.34	
+H    H     2.2
+;H    HC    3.0
+;HC   HC    3.0
+
+
+;===================================================
+; special 1-4 combinations
+[ 14_COMBINATIONS ]
+HA   O      2.5
+HA   H      2.6
+CA   CA     3.74
+NH1  NH1    2.72
+C    C      2.94
+CR1E CR1E   2.72
+CY   CR1E   2.72  
+CY2  CR1E   2.72
+CR1W CR1E   2.72
+CR1W CR1W   2.72
+CY   CY2    2.72
+CF   CR1E   2.72
+NH1  CH2E   3.

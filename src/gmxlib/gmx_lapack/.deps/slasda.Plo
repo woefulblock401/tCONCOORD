@@ -1,0 +1,11 @@
+slasda.lo slasda.o: slasda.c ../../../include/gmx_blas.h \
+  ../../../src/config.h ../../../include/types/simple.h \
+  ../../../include/gmx_lapack.h
+
+../../../include/gmx_blas.h:
+
+../../../src/config.h:
+
+../../../include/types/simple.h:
+
+../../../include/gmx_lapack.h:

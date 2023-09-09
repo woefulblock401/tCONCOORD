@@ -1,0 +1,416 @@
+#include <tconcoord.h>
+/*=============================================================*/
+bool is_planar_group(t_atomlist *al,int n,int *atoms,
+                     const real tol, real *plan)
+
+/* check whether a group of atoms is planar */
+
+{
+  int k,m;
+  rvec x[n];
+  for(k=0;k<n;k++){
+    x[k][XX] = al->x[atoms[k]][XX];
+    x[k][YY] = al->x[atoms[k]][YY];
+    x[k][ZZ] = al->x[atoms[k]][ZZ];
+  }
+  matrix mat;
+  rvec dd;
+  rvec co;
+  com_frag(al,n,atoms,x,co);
+  clear_mat(mat);
+  clear_rvec(dd);
+  princ_comp(n,x,mat,dd);
+
+  if (det(mat) < 0) {
+    for(m=0; (m<DIM); m++)
+      mat[ZZ][m] = -mat[ZZ][m];
+  }
+  rotate_atoms(n,x,mat);
+
+  real adev = 0.;
+  for(k=0;k<n;k++){
+    adev+=sqr(x[k][XX]);
+  }
+  *plan = adev/(real)n;
+  if(*plan < tol) return TRUE;
+  return FALSE;
+}
+
+/*===========================================================*/
+bool check_planar(t_atomlist *al, int n, int *idx, real tol)
+{
+  int i,m,k;
+  rvec x[n];
+  matrix mat,trans;
+  rvec dd;
+  rvec co;
+  bool ret = FALSE;
+
+  
+  clear_mat(mat);
+  clear_mat(trans);
+/*    printf("nat = %d\n",n);  */
+  for(i=0;i<n;i++){
+    copy_rvec(al->x[idx[i]],x[i]);
+/*     printf("%g %g %g\n",x[i][0],x[i][1],x[i][2]); */
+/*     printf("name: %s el: %s m: %g\n",al->name[i],al->symbol[i],al->m[i]); */
+  }
+  com_frag(al,n,idx,x,co);
+/*   printf("co: %g %g %g\n",co[0],co[1],co[2]); */
+  clear_rvec(dd);
+  princ_comp(n,x,mat,dd);
+/*   printf("after princ\n");  */
+  if (det(mat) < 0) {
+    for(m=0; (m<DIM); m++)
+      mat[ZZ][m] = -mat[ZZ][m];
+  }
+  
+  rotate_atoms(n,x,mat);
+/*   printf("after rot\n"); */
+  real adev = 0.;
+  for(k=0;k<n;k++){
+    adev+=sqr(x[k][0]);
+  }
+  adev/=(real)n;
+  if(adev > tol){
+    ret  = TRUE;
+    /* make it flat */
+    for(k=0;k<n;k++){
+      x[k][0] = 0.;
+    }
+    matrix trans;
+    transpose(mat,trans);
+
+    rotate_atoms(n,x,trans);
+/*     printf("after second rot\n");     */
+    for(i=0;i<n;i++){
+      copy_rvec(x[i],al->x[idx[i]]);
+      al->x[idx[i]][0]+=co[0];
+      al->x[idx[i]][1]+=co[1];
+      al->x[idx[i]][2]+=co[2];
+    }
+  }
+  return ret;
+}
+
+/*===========================================================*/
+
+bool check_planar2(t_atomlist *al, int n, int *idx, real tol)
+{
+  int i,m,k;
+  rvec x[n];
+  matrix mat,trans;
+  rvec dd;
+  rvec co;
+  bool ret = FALSE;
+
+  
+  clear_mat(mat);
+  clear_mat(trans);
+/*   printf("nat = %d\n",n); */
+  for(i=0;i<n;i++){
+    copy_rvec(al->x[idx[i]],x[i]);
+  }
+  com_frag(al,n,idx,x,co);
+  clear_rvec(dd);
+  princ_comp(n,x,mat,dd);
+
+  if (det(mat) < 0) {
+    for(m=0; (m<DIM); m++)
+      mat[ZZ][m] = -mat[ZZ][m];
+  }
+  
+  rotate_atoms(n,x,mat);
+
+  real adev = 0.;
+  for(k=0;k<n;k++){
+    
+    adev+=sqr(x[k][XX]);
+  }
+  adev/=(real)n;
+  
+  if(adev > tol){
+    ret  = TRUE;
+    /* make it flat */
+    for(k=0;k<n;k++){
+      x[k][XX] = 0.;
+    }
+    matrix trans;
+    transpose(mat,trans);
+
+    rotate_atoms(n,x,trans);
+
+    for(i=0;i<n;i++){
+      copy_rvec(x[i],al->x[idx[i]]);
+      al->x[idx[i]][XX]+=co[XX];
+      al->x[idx[i]][YY]+=co[YY];
+      al->x[idx[i]][ZZ]+=co[ZZ];
+    }
+  }
+  return ret;
+}
+/*===========================================================*/
+
+bool count_planar(t_atomlist *al, t_idxgroups *pl, real *sum,
+                  int *count, real max, real *pworst)
+{
+  int i,m,k,n,l;
+  
+  matrix mat,trans;
+  rvec dd;
+  rvec co;
+  *sum = 0;
+  *count = 0;
+  real dev[pl->n];
+  *pworst = 0;
+  
+  for(k=0;k<pl->n;k++){ 
+    real ptol;
+    ptol = pl->val[k];
+    n = pl->natoms[k];
+    rvec x[n];
+    clear_mat(mat);
+    clear_mat(trans);
+    for(i=0;i<n;i++){
+      copy_rvec(al->x[pl->atoms[k][i]],x[i]);
+    }
+    com_frag(al,n,pl->atoms[k],x,co);
+    clear_rvec(dd);
+    princ_comp(n,x,mat,dd);
+    if (det(mat) < 0) {
+      for(m=0; (m<DIM); m++)
+        mat[ZZ][m] = -mat[ZZ][m];
+    }
+    rotate_atoms(n,x,mat);
+    real adev = 0.;
+    for(m=0;m<n;m++){
+      adev+=sqr(x[m][0]);
+    }
+    adev/=(real)n;
+    if(adev > ptol){
+      *sum+=adev - ptol;
+      dev[k] = adev/ptol;
+      if(dev[k] > *pworst ) *pworst = dev[k];
+      
+    }
+    if(adev > ptol) *count+=1;
+  }
+  if(*pworst < max && *count < pl->n/100.)
+    return TRUE;
+  else return FALSE;
+
+}
+/*===========================================================*/
+real do_planar_force(t_atomlist *al, int n, int *idx, real tol, real weight)
+{
+  int i,m,k;
+  rvec x[n];
+  rvec f[n];
+  matrix mat,trans;
+  rvec dd;
+  rvec co;
+  bool ret = FALSE;
+  real force = 0;
+
+
+  clear_mat(mat);
+  clear_mat(trans);
+/*   printf("nat = %d\n",n); */
+  for(i=0;i<n;i++){
+    copy_rvec(al->x[idx[i]],x[i]);
+    copy_rvec(al->f[idx[i]],f[i]);
+  }
+  com_frag(al,n,idx,x,co);
+  clear_rvec(dd);
+  princ_comp(n,x,mat,dd);
+/*   printf("after princ\n"); */
+  if (det(mat) < 0) {
+    for(m=0; (m<DIM); m++)
+      mat[ZZ][m] = -mat[ZZ][m];
+  }
+
+  rotate_atoms(n,x,mat);
+  rotate_atoms(n,f,mat);
+
+  real adev = 0.;
+  for(k=0;k<n;k++){
+    adev+=sqr(x[k][0]);
+  }
+  adev/=(real)n;
+  if(adev > tol){
+    ret  = TRUE;
+    /* make it flat */
+    for(k=0;k<n;k++){
+/*       x[k][0] = 0.; */
+      f[k][0] = -x[k][0];
+      force+=f[k][0];
+    }
+    matrix trans;
+    transpose(mat,trans);
+
+    rotate_atoms(n,f,trans);
+
+    for(i=0;i<n;i++){
+
+      al->f[idx[i]][XX]+=f[i][XX]*weight;
+      al->f[idx[i]][YY]+=f[i][YY]*weight;
+      al->f[idx[i]][ZZ]+=f[i][ZZ]*weight;
+    }
+  }
+  return force;
+
+}
+
+/*===========================================================*/
+
+
+void get_planar_groups(FILE *log,t_atomlist *al, t_resl *rl, 
+                       t_idxgroups *pln, bool bIgn)
+{
+  int i,k;
+  int j,l,m;
+  int n;
+  real omtol = 0;
+  real plan;
+  char wstr[STRLEN];
+  
+  FILE *fp = cnclib("planar.dat");
+  
+  t_namegroups *ng = read_namegroups(fp);
+  
+  for(i=0;i<rl->nres;i++){
+    for(k=0;k<ng->n;k++){
+      if(strcmp(rl->resname[i],ng->resname[k]) == 0){
+        pln->n++;
+        pln = idx_realloc(pln,pln->n);
+        n = pln->n-1;
+        pln->val[n] = ng->val[k];
+        
+        for(j=rl->j0[i];j<rl->j1[i];j++){
+          for(l=0;l<ng->natoms[k];l++){
+            if(strcmp(al->name[j],ng->atomnames[k][l]) == 0)
+            {
+              add_to_group(pln,n,j);
+              for(m=0;m<al->nbonds[j];m++){
+/*               printf("adding %d%s\n",al->resid[al->bonds[j][m]],al->name[al->bonds[j][m]]); */
+
+                add_to_group(pln,n,al->bonds[j][m]);
+              }
+            }
+          }
+        }
+        if(pln->natoms[n] < 4){
+          sprintf(wstr,"Group has less than 4 atoms -> cannot create planar group\n");
+          CNCwarn(log,wstr);
+          pln->n--;
+        }
+        
+        else{
+          
+          if(!is_planar_group(al,pln->natoms[n],pln->atoms[n],
+                              pln->val[n], &plan))
+          {
+            sprintf(wstr,"Planarity violation %d%s \n",
+                    al->resid[pln->atoms[n][0]],al->resname[pln->atoms[n][0]]);
+            CNCwarn(log,wstr); 
+            
+            sprintf(wstr,"(%d%s %d%s ..)... %g -> %g\n", 
+                    al->id[pln->atoms[n][0]],al->name[pln->atoms[n][0]], 
+                    al->id[pln->atoms[n][1]],al->name[pln->atoms[n][1]], 
+                    pln->val[n],plan); 
+            
+            CNCwarn(log,wstr); 
+            if(!bIgn) {
+              sprintf(wstr,"Setting tolerance to %g\n",plan*1.01);
+              CNCwarn(log,wstr);
+              pln->val[n] = plan*1.01;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* omega guys */
+  
+  for(k=0;k<ng->n;k++){
+    if(strcmp(ng->resname[k],"OMEGA") == 0) omtol = ng->val[k];
+  }
+
+
+
+  int omega_n,omega_c;
+  for(i=0;i<rl->nres-1;i++){
+    if(IsProtein(al,rl->j0[i])){
+      omega_c = -1;omega_n=-1;
+      for(k=rl->j0[i];k<rl->j1[i];k++){
+        if(strcmp(al->name[k]," C  ") == 0){
+          omega_c =  k;
+        }
+      }
+      for(k=0;k<al->nbonds[omega_c];k++){
+        if(strcmp(al->name[al->bonds[omega_c][k]]," N  ") == 0){
+          omega_n =  al->bonds[omega_c][k];
+        }
+      }
+      if(omega_n!=-1 && omega_c!=-1){
+        pln->n++;
+        pln = idx_realloc(pln,pln->n);
+        n = pln->n-1;
+        pln->val[n] = omtol;
+        add_to_group(pln,n,omega_c);
+        for(m=0;m<al->nbonds[omega_c];m++){
+          add_to_group(pln,n,al->bonds[omega_c][m]);
+        }
+        for(m=0;m<al->nbonds[omega_n];m++){
+          add_to_group(pln,n,al->bonds[omega_n][m]);
+        }
+        if(pln->natoms[n] < 3){
+          sprintf(wstr,"Group has less than 3 atoms -> cannot create planar group\n");
+          CNCwarn(log,wstr);
+          pln->n--;
+        }
+        else{
+          
+          if(!is_planar_group(al,pln->natoms[n],pln->atoms[n],omtol,&plan))
+          {
+           sprintf(wstr,"Planarity violation %d%s \n(%d%s %d%s ..)... %g -> %g\n", 
+                   al->resid[pln->atoms[n][0]],al->resname[pln->atoms[n][0]], 
+                   al->id[pln->atoms[n][0]],al->name[pln->atoms[n][0]], 
+                   al->id[pln->atoms[n][1]],al->name[pln->atoms[n][1]], 
+                   omtol,plan); 
+           CNCwarn(log,wstr); 
+            if(!bIgn) {
+              sprintf(wstr,"Setting tolerance to %g\n",plan*1.01);
+              CNCwarn(log,wstr);
+              pln->val[n] = plan*1.01;
+            }
+          }
+        }
+        
+
+/*         pln->n++; */
+/*         pln = idx_realloc(pln,pln->n); */
+/*         n = pln->n-1; */
+/*         pln->val[n] = omtol; */
+/*         add_to_group(pln,n,omega_n); */
+/*         for(m=0;m<al->nbonds[omega_n];m++){ */
+/*           add_to_group(pln,n,al->bonds[omega_n][m]); */
+/*         } */
+/*         if(!is_planar_group(al,pln->natoms[n],pln->atoms[n],omtol,&plan)) */
+/*         { */
+/*           sprintf(wstr,"Planarity violation... %g -> %g\n",omtol,plan); */
+/*           CNCwarn(log,wstr); */
+/*           if(!bIgn) { */
+/*             sprintf(wstr,"Setting tolerance to %g\n",plan*1.01); */
+/*             CNCwarn(log,wstr); */
+/*             pln->val[n] = plan*1.01; */
+/*           } */
+/*         } */
+
+      }
+    }
+  }
+        
+}
+

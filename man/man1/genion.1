@@ -1,0 +1,122 @@
+.TH genion 1 "Mon 29 Aug 2005"
+.SH NAME
+genion
+.B VERSION 3.3_beta_20050823
+.SH SYNOPSIS
+\f3genion\fP
+.BI "-s" " topol.tpr "
+.BI "-table" " table.xvg "
+.BI "-n" " index.ndx "
+.BI "-o" " out.gro "
+.BI "-g" " genion.log "
+.BI "-pot" " pot.pdb "
+.BI "-[no]h" ""
+.BI "-nice" " int "
+.BI "-[no]xvgr" ""
+.BI "-np" " int "
+.BI "-pname" " string "
+.BI "-pq" " real "
+.BI "-nn" " int "
+.BI "-nname" " string "
+.BI "-nq" " real "
+.BI "-rmin" " real "
+.BI "-[no]random" ""
+.BI "-seed" " int "
+.BI "-scale" " real "
+.SH DESCRIPTION
+genion replaces solvent molecules by monoatomic ions at
+the position of the first atoms with the most favorable electrostatic
+potential or at random. The potential is calculated on all atoms, using
+normal GROMACS particle based methods (in contrast to other methods
+based on solving the Poisson-Boltzmann equation).
+The potential is recalculated after every ion insertion.
+If specified in the run input file, a reaction field, shift function
+or user function can be used. For the user function a table file
+can be specified with the option 
+.B -table
+.
+The group of solvent molecules should be continuous and all molecules
+should have the same number of atoms.
+The user should add the ion molecules to the topology file and include
+the file 
+.B ions.itp
+.
+Ion names for Gromos96 should include the charge.
+
+
+With the option 
+.B -pot
+the potential can be written as B-factors
+in a pdb file (for visualisation using e.g. rasmol).
+The unit of the potential is 1000 kJ/(mol e), the scaling be changed
+with the 
+.B -scale
+option.
+
+
+For larger ions, e.g. sulfate we recommended to use genbox.
+.SH FILES
+.BI "-s" " topol.tpr" 
+.B Input
+ Generic run input: tpr tpb tpa xml 
+
+.BI "-table" " table.xvg" 
+.B Input, Opt.
+ xvgr/xmgr file 
+
+.BI "-n" " index.ndx" 
+.B Input, Opt.
+ Index file 
+
+.BI "-o" " out.gro" 
+.B Output
+ Generic structure: gro g96 pdb xml 
+
+.BI "-g" " genion.log" 
+.B Output
+ Log file 
+
+.BI "-pot" " pot.pdb" 
+.B Output, Opt.
+ Protein data bank file 
+
+.SH OTHER OPTIONS
+.BI "-[no]h"  "    no"
+ Print help info and quit
+
+.BI "-nice"  " int" " 19" 
+ Set the nicelevel
+
+.BI "-[no]xvgr"  "   yes"
+ Add specific codes (legends etc.) in the output xvg files for the xmgrace program
+
+.BI "-np"  " int" " 0" 
+ Number of positive ions
+
+.BI "-pname"  " string" " Na" 
+ Name of the positive ion
+
+.BI "-pq"  " real" "      1" 
+ Charge of the positive ion
+
+.BI "-nn"  " int" " 0" 
+ Number of negative ions
+
+.BI "-nname"  " string" " Cl" 
+ Name of the negative ion
+
+.BI "-nq"  " real" "     -1" 
+ Charge of the negative ion
+
+.BI "-rmin"  " real" "    0.6" 
+ Minimum distance between ions
+
+.BI "-[no]random"  "    no"
+ Use random placement of ions instead of based on potential. The rmin option should still work
+
+.BI "-seed"  " int" " 1993" 
+ Seed for random number generator
+
+.BI "-scale"  " real" "  0.001" 
+ Scaling factor for the potential for -pot
+

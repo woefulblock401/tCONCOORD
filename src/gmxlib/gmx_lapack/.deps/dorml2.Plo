@@ -1,0 +1,36 @@
+dorml2.lo dorml2.o: dorml2.c /usr/include/ctype.h /usr/include/features.h \
+  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+  /usr/include/bits/types.h \
+  /usr/lib64/gcc/x86_64-suse-linux/4.2.1/include/stddef.h \
+  /usr/include/bits/typesizes.h /usr/include/endian.h \
+  /usr/include/bits/endian.h ../../../include/gmx_lapack.h \
+  ../../../src/config.h ../../../include/types/simple.h
+
+/usr/include/ctype.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/bits/types.h:
+
+/usr/lib64/gcc/x86_64-suse-linux/4.2.1/include/stddef.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+../../../include/gmx_lapack.h:
+
+../../../src/config.h:
+
+../../../include/types/simple.h:

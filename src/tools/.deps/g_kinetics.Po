@@ -1,0 +1,6 @@
+g_kinetics.o g_kinetics.o: g_kinetics.c ../../src/config.h \
+  ../../include/gmx_ana.h
+
+../../src/config.h:
+
+../../include/gmx_ana.h:

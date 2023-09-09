@@ -1,0 +1,51 @@
+[ PHE ]
+7   0.0 
+CB      
+CG
+CD1
+CD2
+CE1
+CE2
+CZ 
+
+[ TRP ]
+
+9  0.0
+CB
+CG
+CD1
+CD2
+CE2
+CE3
+CZ2
+CZ3
+CH2 
+
+[ VAL ]
+3  0.0
+CB
+CG1
+CG2
+
+[ ILE ]
+
+4  0.0
+CB
+CG1
+CG2
+CD1
+
+[ LEU ]
+4  0.0
+CB
+CG
+CD1
+CD2
+
+[ MET ]
+3 0.0
+CB
+CG
+CE
+
+ 

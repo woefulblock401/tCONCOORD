@@ -1,0 +1,5 @@
+# zsh configuration file for tCONCOORD
+CNCBIN=$HOME/tCONCOORD-1.0/bin
+CNCLIB=$HOME/tCONCOORD-1.0/lib
+PATH=${PATH}:${CNCBIN}
+export CNCBIN CNCLIB PATH 
